@@ -1,0 +1,27 @@
+<div class="jumbotron text-center">
+<h1>Search Trainee</h1>
+
+</div>
+
+<form>
+
+    <div class="form-group">
+      <label for="traineId"><h2>Enter Trainee Id </h2></label>
+      <input [(ngModel)]="traineId" type="number"  class="form-control" name="traineId"  id="traineId" >
+    </div>
+  
+  
+  
+   <button  (click)="searchTrainee()" type="submit" class="btn btn-primary"> Search Trainee  </button>
+  
+  </form>
+  
+  <div *ngIf="flag==true; else elseBlock">
+  
+    <h1> Trainee Id = {{trainee.traineeId}}</h1>
+    <h1> Trainee Name  = {{trainee.traineeName}}</h1>
+    <h1> Trainee Location  = {{trainee.traineeLocation}}</h1>
+    <h1> Trainee Domain  = {{trainee.traineeDomain}}</h1>
+  </div>
+
+  <ng-template #elseBlock> <h1 >{{traineId}} Id not found</h1></ng-template>

@@ -1,0 +1,106 @@
+<div class="jumbotron text-center">
+
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <th>S.No</th>
+          <th>Trainee Id</th>
+          <th>Trainee Name</th>
+          <th>Trainee Location</th>
+          <th>Trainee Domain</th>
+        </tr>
+  
+       <tr *ngFor="let traine of arr;let i=index">
+         <td>{{i}}</td>
+         <td>{{traine.traineeId}}</td>
+         <td>{{traine.traineeName}}</td>
+         <td>{{traine.traineeLocation}}</td>
+         <td>{{traine.traineeDomain}}</td>
+         <td><button (click)="update(traine)" class="btn btn-primary">Update</button></td>
+         <td><button (click)="delete(traine.traineeId)"  class="btn btn-primary">Delete</button></td>
+       </tr>
+      </tbody>
+  
+    </table>
+
+    <div *ngIf="flag" >
+      <h1>Update Trainee Details</h1>
+          <form #traineeform="ngForm" novalidate>
+        
+              <div class="form-group">
+                <label for="traineId">Enter Trainee   Id </label>
+                <input   type="text" pattern="[0-9]+" minlength="3"  class="form-control" required [(ngModel)]="trainee.traineeId" #traineeId="ngModel" name="traineId"  id="traineId" >
+             <div *ngIf="traineeId.invalid && (traineeId.dirty || traineeId.touched)" class="alert alert-danger">
+            <div *ngIf="traineeId.errors.required">
+               Trainee Id is required.
+              </div>
+             <div *ngIf="traineeId.errors.minlength">
+                Trainee Id must be at least 3 digits long.
+            </div>
+             <div *ngIf="traineeId.errors.pattern">
+               Trainee Id should contain only numbers.
+             </div>
+          </div>
+        </div>
+        
+              <div class="form-group">
+                  <label for="traineName">Enter Trainee Name To Update </label>
+                  <input  required [(ngModel)]="trainee.traineeName"  #traineeName="ngModel" type="text" minlength="4" pattern="[a-zA-Z ]+"  class="form-control"   name="traineName"  id="traineName">
+            <div *ngIf="traineeName.invalid && (traineeName.dirty || traineeName.touched)" class="alert alert-danger">
+                <div *ngIf="traineeName.errors.required">
+                   Trainee Name is required.
+                  </div>
+                 <div *ngIf="traineeName.errors.minlength">
+                    Trainee Name must be at least 4 characters long.
+                </div>
+                 <div *ngIf="traineeName.errors.pattern">
+                    Trainee Name should contain only characters.
+                 </div>
+           </div>
+              </div>
+        
+              <div class="form-group">
+                  <label for="traineLocation">Enter Trainee Location Update</label>
+                  <input   required [(ngModel)]="trainee.traineeLocation" #traineeLocation="ngModel" minlength="4" pattern="[a-zA-Z ]+" class="form-control" name="traineLocation"  id="traineLocation">
+                  <div *ngIf="traineeLocation.invalid && (traineeLocation.dirty || traineeLocation.touched)" class="alert alert-danger">
+                      <div *ngIf="traineeLocation.errors.required">
+                          Trainee Location is required.
+                        </div>
+                       <div *ngIf="traineeLocation.errors.minlength">
+                          Trainee Location must be at least 4 characters long.
+                      </div>
+                       <div *ngIf="traineeLocation.errors.pattern">
+                          Trainee Location should contain only characters.
+                       </div>
+                 </div>
+              </div>
+              
+      
+              <div class="form-group">
+                  <label for="traineDomain">Enter Trainee Domain Update </label>
+                  <input  required [(ngModel)]="trainee.traineeDomain" #traineeDomain="ngModel" minlength="3" pattern="[a-zA-Z ]+"  class="form-control" name="traineDomain"  id="traineDomain">
+                  <div *ngIf="traineeDomain.invalid && (traineeDomain.dirty || traineeDomain.touched)" class="alert alert-danger">
+                      <div *ngIf="traineeDomain.errors.required">
+                          Trainee Domain is required.
+                        </div>
+                       <div *ngIf="traineeDomain.errors.minlength">
+                          Trainee Domain must be at least 3 characters long.
+                      </div>
+                       <div *ngIf="traineeDomain.errors.pattern">
+                          Trainee Domain should contain only characters.
+                       </div>
+                 </div>
+              </div>
+
+             <button   (click)="updateTraineeById()"  [disabled]="!traineeform.form.valid"  type="submit" class="btn btn-primary"> Update Trainee  </button>
+        
+            </form>
+        
+        </div>
+
+
+    <div *ngIf="!flag">
+      <h2>Trainee Name = {{trainee.traineeName}}</h2>
+    </div>
+  </div>
+  
